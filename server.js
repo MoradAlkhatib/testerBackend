@@ -101,8 +101,8 @@ app.delete('/delete-fav/:id',(req,res)=>{
 })
 
 // update juice data
-app.put('/update-fav' ,(req,res)=>{
-   let id=req.body.id;
+app.put('/update-fav/:id' ,(req,res)=>{
+   let id=req.params.id;
 
    let newBody={
     juiceName:req.body.name,
