@@ -55,7 +55,7 @@ app.get("/juice", (req, res) => {
 // add to favorite
 app.post("/add-fav",(req,res)=>{
     let test=new UserModel({
-        email:req.body.email,
+       email:req.body.email,
        juiceName:req.body.name,
        juiceUrl:req.body.url,
        juiceDes:req.body.des
@@ -80,15 +80,21 @@ app.get('/favorite/:email',(req,res)=>{
 })
 
 // delete from favorite
-app.delete('/delete-fav',(req,res)=>{
-   let id=req.body.id;
+app.delete('/delete-fav/:id',(req,res)=>{
+   let id=req.params.id;
     UserModel.findByIdAndDelete(id, function (err, docs) {
         if (err){
             console.log(err)
         }
         else{
+          if(docs.length>0){
             console.log("Deleted : ", docs);
              res.send('Deleted Successfully')
+          }
+          else{
+            res.send('Your Id is UnCorrect')
+          }
+            
         }
     });
 
